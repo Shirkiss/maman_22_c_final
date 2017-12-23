@@ -1,0 +1,11 @@
+read_mat MAT_G, 3.2, 8
+do_it MAT_A, MAT_B, MAT_C
+read_mat MAT_A, abc, 567 
+mul_mat MAT_B, MAT_C
+trans_mat MAT_B, MAT_C, MAT_D
+print_mat, MAT_A
+trans_mat MAT_A MAT_B 
+add_mat MAT_A, , MAT_B, MAT_C
+mul_scalar MAT_A, 4.25, MAT_A
+add_mat MAT_A, , MAT_B, MAT_C 
+mul_scalar MAT_A, 4.25, MAT_A,

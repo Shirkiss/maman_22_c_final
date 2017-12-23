@@ -1,52 +1,39 @@
 #include "mat.h"
- 
-int main()
-{
-  int m, n, p, q, c, d, k, sum = 0;
-  int first[10][10], second[10][10], multiply[10][10];
- 
-  printf("Enter the number of rows and columns of first matrix\n");
-  scanf("%d%d", &m, &n);
-  printf("Enter the elements of first matrix\n");
- 
-  for (c = 0; c < m; c++)
-    for (d = 0; d < n; d++)
-      scanf("%d", &first[c][d]);
- 
-  printf("Enter the number of rows and columns of second matrix\n");
-  scanf("%d%d", &p, &q);
- 
-  if (n != p)
-    printf("Matrices with entered orders can't be multiplied with each other.\n");
-  else
-  {
-    printf("Enter the elements of second matrix\n");
- 
-    for (c = 0; c < p; c++)
-      for (d = 0; d < q; d++)
-        scanf("%d", &second[c][d]);
- 
-    for (c = 0; c < m; c++) {
-      for (d = 0; d < q; d++) {
-        for (k = 0; k < p; k++) {
-          sum = sum + first[c][k]*second[k][d];
-        }
- 
-        multiply[c][d] = sum;
-        sum = 0;
-      }
-    }
- 
-    printf("Product of entered matrices:-\n");
- 
-    for (c = 0; c < m; c++) {
-      for (d = 0; d < q; d++)
-        printf("%d\t", multiply[c][d]);
- 
-      printf("\n");
-    }
-  }
- 
-  return 0;
-}
 
+struct {
+    char *name;
+
+    void (*func)(void);
+} cmd[] = {
+        {"read_mat",   read_mat},
+        {"print_mat",  print_mat},
+        {"add_mat",    add_mat},
+        {"sub_mat",    sub_mat},
+        {"mul_mat",    mul_mat},
+        {"trans_mat",  trans_mat},
+        {"mul_scalar", mul_scalar},
+        {"stop",       stop},
+        {"not_valid", NULL}
+};
+
+
+int main(void) {
+    char command[30];
+    int i;
+    FOREVER if (scanf("%s", command) == 1) {
+            flag = FUNCTION_PART;
+            for (i = 0; cmd[i].func != NULL; i++)
+                if (strcmp(command, cmd[i].name) == 0)
+                    break;
+            if (cmd[i].func == NULL) {
+                if (command[(strlen(command) - 1)] == ',')
+                    fprintf(stderr, "\nInvalid comma after command name\n");
+                else
+                    fprintf(stderr, "Unknown command name: %s\n", command);
+                not_valid();
+            } else
+                (*(cmd[i].func))();
+        }
+
+    return 0;
+}
