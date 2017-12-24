@@ -16,6 +16,7 @@
 #define EXTRA_PART 5
 
 int flag;
+char* line_ptr;
 
 typedef double matrix[SIZE][SIZE];
 

@@ -56,7 +56,7 @@ double getop(char s[]) {
         }
     }
     /*handle more than 1 digit numbers*/
-    if (isdigit(c))
+    else if (isdigit(c))
         while (isdigit(s[++i] = c = *(++line_ptr)));
     /*handle fractures*/
     if (c == '.')
@@ -125,4 +125,3 @@ void not_valid(void) {
     flag = ERROR;
     while ((getchar()) != '\n');
 }
-
